@@ -4,7 +4,9 @@
 
 This project demonstrate on full stack app development with Frontend in React JS (Typescript), Redux, Backend in NestJS with Graphql and Postgres as DB.
 
-## Atomic design model
+## The Focus  🎯
+In this repo we are focusing on following and practicing reasonable design pattern and implment clean code and coding best practices.
+## Atomic design model / pattern
 
 We shall practice atomic design model with properly arranging and aligning our components to atoms, molecules and organisms. Moreover, we can focus and emphasize on practicing writing clean code.
 
@@ -14,18 +16,16 @@ We shall create task management page where user is able to create task, edit tas
 
 We would also be having backend in NestJS using graphql and Postgres as our DB for data storage.
 
-- Create a task
-  - Give the task a name during the creation
-  - Select task type - Story or Bug
-  - Enter how much time they spent on task
-  - Enter dates on which they were working on a task, if empty - the current date should be pre-filled
-  - Add 0 to 3 labels/tags
-- See the list of previously created tasks
+Here is glimpse of features we have implemented;
+
+- Task Management
+  - Task management CRUD operation using `react-hook-form`.
+    - Edit task 
+    - Delete task
+  - Taks cards container (Trello 😎)
+- File Management 
   - export a list of created tasks as JSON file
   - import a list of tasks as JSON file
-- Edit a task
-  - edit any field of the task
-  - delete task
 - See the dashboard with insights about tasks
   - see the bar chart for tasks
 
