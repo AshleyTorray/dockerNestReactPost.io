@@ -2,30 +2,21 @@ import moment from 'moment';
 import { Card, Box, Typography, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-
-enum TaskTypeEnum {
-  STORY = 'STORY',
-  BUG = 'STORY',
-}
-
-interface ITask {
-  id: string;
-  name: string;
-  description: string;
-  type: TaskTypeEnum;
-  startDate: string;
-  tags: string;
-}
+import { deleteTaskAsync } from 'store/tasks/tasksSlice';
+import { useDispatch } from 'hooks';
+import { ITask } from 'typings/interfaces';
 
 interface TaskProps {
   data: ITask;
+  onEdit: (task: ITask) => void;
 }
 
-const TaskCard: React.FC<TaskProps> = ({ data }) => {
+const TaskCard: React.FC<TaskProps> = ({ data, onEdit }) => {
   const tagsDisplayLimit = 3;
+  const dispatch = useDispatch();
   const tags = data.tags.split(';');
   const displayTags = tags.length > 0 ? data.tags.split(';').splice(0, tagsDisplayLimit) : [];
-  console.log({ data });
+  console.log({ startDate: data.startDate });
   return (
     <Card
       sx={{ padding: '1rem', backgroundColor: 'Background', width: '100%', minHeight: '200px', maxHeight: '200px' }}
@@ -35,10 +26,10 @@ const TaskCard: React.FC<TaskProps> = ({ data }) => {
         <Typography variant="h6" color="inherit" component="div">
           {data.name || 'No name provided'}
         </Typography>
-        <IconButton aria-label="edit" size="medium">
+        <IconButton aria-label="edit" size="medium" onClick={() => onEdit(data)}>
           <EditIcon fontSize="inherit" />
         </IconButton>
-        <IconButton aria-label="delete" size="medium">
+        <IconButton aria-label="delete" size="medium" onClick={() => dispatch(deleteTaskAsync(data.id))}>
           <DeleteIcon fontSize="inherit" />
         </IconButton>
       </Box>
