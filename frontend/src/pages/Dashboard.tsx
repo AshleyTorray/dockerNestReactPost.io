@@ -1,7 +1,7 @@
 import { FC, Fragment, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Moment } from 'moment';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { RootState } from 'store/store';
 import { StrechedBox } from 'components/atoms';
@@ -29,15 +29,15 @@ const Dashboard: FC = () => {
       </StrechedBox>
 
       {tasks && (
-        <StrechedBox stack>
+        <Stack>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Typography variant="h5" color="inherit" component="div" gutterBottom>
+            <Typography variant="h5" gutterBottom>
               Tasks Chart
             </Typography>
           </Box>
 
           <BarChart data={tasks} />
-        </StrechedBox>
+        </Stack>
       )}
     </Fragment>
   );
