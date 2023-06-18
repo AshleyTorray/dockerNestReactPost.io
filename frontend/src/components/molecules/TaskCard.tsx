@@ -16,7 +16,7 @@ const TaskCard: React.FC<TaskProps> = ({ data, onEdit }) => {
   const dispatch = useDispatch();
   const tags = data.tags.split(';');
   const displayTags = tags.length > 0 ? data.tags.split(';').splice(0, tagsDisplayLimit) : [];
-  console.log({ startDate: data.startDate });
+
   return (
     <Card
       sx={{ padding: '1rem', backgroundColor: 'Background', width: '100%', minHeight: '200px', maxHeight: '200px' }}
