@@ -7,12 +7,10 @@ import { IMenuRoute } from 'typings/interfaces';
 const DefaultAppBar: FC = () => {
   const navigate = useNavigate();
   return (
-    <AppBar position="static" sx={{ boxShadow: 'none' }}>
+    <AppBar>
       <Toolbar variant="dense">
         <Container maxWidth="md" sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Typography variant="h6" color="inherit" component="div">
-            The Venture City
-          </Typography>
+          <Typography variant="h6">The Venture City</Typography>
           <Box sx={{ display: 'flex' }}>
             {menuRoutes.map((item: IMenuRoute) => (
               <Button key={item.name} onClick={() => navigate(item.path)} color="inherit">
