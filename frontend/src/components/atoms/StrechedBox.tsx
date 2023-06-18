@@ -15,6 +15,7 @@ const StrechedBox: FC<StrechedBoxProps> = ({ stack, children }) => {
         flexDirection: stack ? 'column' : 'row',
         alignItems: stack ? 'inherit' : 'center',
       }}
+      data-testid="streched-box"
     >
       {children}
     </Box>
