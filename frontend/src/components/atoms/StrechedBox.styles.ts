@@ -1,5 +1,4 @@
 export const strechedBoxStyles = {
-  bgcolor: '#F0F0F0',
   display: 'flex',
   justifyContent: 'space-between',
   margin: '1rem 0',
