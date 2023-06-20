@@ -5,6 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { deleteTaskAsync } from 'store/tasks/tasksSlice';
 import { useDispatch } from 'hooks';
 import { ITask } from 'typings/interfaces';
+import { TagContainer, TaskCardContainer } from './TaskCard.styles';
 
 interface TaskProps {
   data: ITask;
@@ -18,53 +19,38 @@ const TaskCard: React.FC<TaskProps> = ({ data, onEdit }) => {
   const displayTags = tags.length > 0 ? data.tags.split(';').splice(0, tagsDisplayLimit) : [];
 
   return (
-    <Card sx={{ minHeight: '200px', maxHeight: '200px' }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', justifyItems: 'center', alignItems: 'center' }}>
-        <Typography variant="h6">{data.name || 'No name provided'}</Typography>
-        <IconButton onClick={() => onEdit(data)}>
-          <EditIcon fontSize="inherit" />
-        </IconButton>
-        <IconButton onClick={() => dispatch(deleteTaskAsync(data.id))}>
-          <DeleteIcon fontSize="inherit" />
-        </IconButton>
-      </Box>
+    <Card>
+      <TaskCardContainer>
+        <Box>
+          <Typography variant="h6">{data.name || 'No name provided'}</Typography>
 
-      <Typography gutterBottom>{data.description || 'No description provided'}</Typography>
-      <Typography variant="body2">Type: {data.type || 'No type provided'}</Typography>
-      <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-        <Typography variant="body2">Tags:</Typography>
+          <Typography gutterBottom>{data.description || 'No description provided'}</Typography>
+          <Typography variant="body2">Type: {data.type || 'No type provided'}</Typography>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+            <Typography variant="body2">Tags:</Typography>
 
-        {displayTags.length > 0
-          ? displayTags.map((tag, index) => (
-              <Box
-                key={index}
-                style={{
-                  padding: '0rem 0.5rem',
-                  margin: '0.1rem 0.1rem',
-                  backgroundColor: '#F0F0F0',
-                  borderRadius: '0.2rem',
-                }}
-              >
-                <Typography>{tag}</Typography>
-              </Box>
-            ))
-          : 'No tags provided'}
-        {tags.length > displayTags[0].length && (
-          <Box
-            style={{
-              padding: '0rem 0.4rem',
-              margin: '0.1rem 0.1rem',
-              backgroundColor: '#F0F0F0',
-              borderRadius: '0.2rem',
-            }}
-          >
-            <Typography variant="body2">{`+ ${tags.length - displayTags[0].length} more`}</Typography>
+            {displayTags.map((tag, index) => <TagContainer key={index} tag={tag} />) ?? 'No tags provided'}
+
+            {tags.length > displayTags[0].length && (
+              <TagContainer tag={`+ ${tags.length - displayTags[0].length} more`} />
+            )}
           </Box>
-        )}
-      </Box>
-      <Typography variant="body2">
-        Start Date: {moment(data.startDate).fromNow() || 'No start date provided'}
-      </Typography>
+          <Typography variant="body2">
+            Start Date: {moment(data.startDate).fromNow() || 'No start date provided'}
+          </Typography>
+        </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography variant="body2">{moment(data.startDate).format('YYYY-MM-DD')}</Typography>
+          <Box>
+            <IconButton onClick={() => onEdit(data)} size="small">
+              <EditIcon fontSize="inherit" />
+            </IconButton>
+            <IconButton onClick={() => dispatch(deleteTaskAsync(data.id))} size="small">
+              <DeleteIcon fontSize="inherit" />
+            </IconButton>
+          </Box>
+        </Box>
+      </TaskCardContainer>
     </Card>
   );
 };
