@@ -1,16 +1,14 @@
-import { FC } from 'react';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import AppRouter from 'Router';
-import theme from 'theme';
+import React from 'react';
+import NavBar from './components/NavBar/NavBar.js';
+import Home from './components/Home/Home.js';
 
-const App: FC = () => {
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AppRouter />
-    </ThemeProvider>
-  );
+const App = () => {
+    return (
+        <div className="App">
+            <NavBar />
+            <Home />
+        </div>
+    );
 };
 
 export default App;

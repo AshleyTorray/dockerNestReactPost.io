@@ -1,13 +1,22 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { Logger } from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common';
+import cookieParser from 'cookie-parser';
+import AppModule from './app.module';
 
-export const bootstrap = async () => {
+async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
 
-  const PORT = process.env.PORT || 9898;
-  await app.listen(PORT, () => Logger.log(`Backend is listening on port ${PORT}`));
-};
+  app.enableCors({
+    origin: true,
+    credentials: true,
+  });
 
+  app.setGlobalPrefix('v2');
+
+  app.useGlobalPipes(new ValidationPipe());
+
+  app.use(cookieParser());
+
+  await app.listen(process.env.START_PORT || 7072);
+}
 bootstrap();
