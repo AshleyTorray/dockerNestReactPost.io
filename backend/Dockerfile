@@ -1,34 +1,17 @@
-# Use a Node base image
-FROM node:14 as builder
+# Backend/Dockerfile
 
-# Create app directory
+# Build stage
+FROM node:14 as build
+
 WORKDIR /usr/src/app
-
-# Install app dependencies by copying
-# package.json and package-lock.json
 COPY package*.json ./
-
-# Install dependencies
+COPY .base.env ./ 
 RUN npm install
 
-# Bundle app source
 COPY . .
-
-# Build the application
 RUN npm run build
 
-# Production image
-FROM node:14
+# Run stage
 
-# Set working directory
-WORKDIR /usr/src/app
-
-# Copy built assets from the builder stage
-COPY --from=builder /usr/src/app/dist ./dist
-COPY --from=builder /usr/src/app/node_modules ./node_modules
-
-# Expose the port the app runs on
 EXPOSE 7072
-
-# Run the app
-CMD ["node", "dist/main"]
+CMD ["npm", "run", "start:prod"]

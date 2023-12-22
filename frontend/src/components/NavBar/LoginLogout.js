@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { BiExit } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
 import { GiExitDoor } from 'react-icons/gi';
-import { RiProfileLine } from 'react-icons/ri';
 import classes from './NavBar.module.css';
 
 const logOut = () => {

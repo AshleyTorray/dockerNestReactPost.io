@@ -5,14 +5,13 @@ import LoginModule from 'src/auth/login/login.module';
 import CommentEntity from 'database/entities/user.entity';
 import RegisterEntity from 'database/entities/register.entity';
 import RegisterModule from 'src/auth/register/register.module';
-import MemberModule from 'src/member/member.module';
 import * as Joi from 'joi';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ['database/.config.env', '.base.env'],
+      envFilePath: '.base.env',
       validationSchema: Joi.object({
         NODE_ENV: Joi.string()
           .valid('development', 'production', 'test', 'provision')
@@ -39,7 +38,6 @@ import * as Joi from 'joi';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    MemberModule,
     LoginModule,
     RegisterModule,
   ],

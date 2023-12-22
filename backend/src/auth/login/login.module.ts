@@ -13,7 +13,7 @@ import LoginController from './login.controller';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ['database/.secrets.vault.env'],
+      envFilePath: '.base.env',
     }),
     TypeOrmModule.forFeature([RegisterEntity]),
     PassportModule,
